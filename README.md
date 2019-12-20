@@ -11,6 +11,7 @@
 
 # Установка Ansible
 (сначала шпарим на ubuntu)
+
 Ansible требует для своей работы python. Проверить версию python:
 ```
 python -V
