@@ -87,3 +87,6 @@ ansible -i /home/ed/otus/10/staging/hosts all -m ping
 ansible -i /home/ed/otus/10/staging/hosts all -m command -a "uname -r"
 ```
 ![Image alt](https://github.com/Edo1993/otus_10/raw/master/104.png)
+```
+ansible nginx -m systemd -a name=firewalld
+```
