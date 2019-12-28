@@ -44,3 +44,6 @@ cp Vagrantfile 10_otus/2/
 ```
 Поднимаем vm командой ```vagrant_up```, для подключения к хосту nginx нам необходимо будет передать множество параметров - это особенность Vagrant. Узнать эти параметры можно с помощью ```vagrant ssh-config```
 В ответ получаем:
+
+![Image alt](https://github.com/Edo1993/otus_10/raw/master/101.png)
+![Image alt](https://github.com/Edo1993/otus_13/raw/master/102.png)
