@@ -247,3 +247,4 @@ ansible-playbook nginx.yml -t nginx-package
         name: nginx
         state: reloaded
 ```
+Запускаем измененный playbook.
