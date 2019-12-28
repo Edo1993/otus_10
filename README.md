@@ -47,4 +47,4 @@ cp Vagrantfile 10_otus/2/
 
 ![Image alt](https://github.com/Edo1993/otus_10/raw/master/101.png)
 
-![Image alt](https://github.com/Edo1993/otus_13/raw/master/102.png)
+![Image alt](https://github.com/Edo1993/otus_10/raw/master/102.png)
