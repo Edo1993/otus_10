@@ -257,4 +257,4 @@ http://192.168.11.150:8080/
 ![Image alt](https://github.com/Edo1993/otus_10/raw/master/112.png)
 http://192.168.11.151:8080/
 ![Image alt](https://github.com/Edo1993/otus_10/raw/master/113.png)
-Все файлы, по которым можно воспроизвести - [тут](https://gist.github.com/lalbrekht/f811ce9a921570b1d95e07a7dbebeb1e)
+Все файлы, по которым можно воспроизвести - [тут](https://github.com/Edo1993/otus_10/tree/master/1_part)
