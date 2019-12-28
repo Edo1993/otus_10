@@ -258,3 +258,6 @@ http://192.168.11.150:8080/
 http://192.168.11.151:8080/
 ![Image alt](https://github.com/Edo1993/otus_10/raw/master/113.png)
 Все файлы, по которым можно воспроизвести - [тут](https://github.com/Edo1993/otus_10/tree/master/1_part)
+
+# Роль
+
