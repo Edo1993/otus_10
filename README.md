@@ -48,3 +48,33 @@ cp Vagrantfile 10_otus/2/
 ![Image alt](https://github.com/Edo1993/otus_10/raw/master/101.png)
 
 ![Image alt](https://github.com/Edo1993/otus_10/raw/master/102.png)
+
+Создадим отедльную директорию под inventory-файл, и сам файл hosts.
+```
+mkdir staging
+cd staging
+vi hosts
+```
+Содержимое файла hosts
+```
+[web]
+nginx2 ansible_host=127.0.0.1 ansible_port=2201 ansible_private_key_file=/home/ed/otus/10_otus/2/.vagrant/machines/nginx2/virtualbox/private_key
+nginx ansible_host=127.0.0.1 ansible_port=2200 ansible_private_key_file=/home/ed/otus/10_otus/1/.vagrant/machines/nginx/virtualbox/private_key
+```
+Отредактируем файл ```ansible.cfg```
+inventory - путь к моему hosts
+remote_user = vagrant - эту строку можно не указывать, но тогда в hosts для каждой vm должен быть указан ```ansible_user=vagrant```
+host_key_checking = False - отменить проверку пароля
+```
+[defaults]
+inventory = /home/ed/otus/10_otus/staging/hosts
+remote_user = vagrant
+host_key_checking = False
+retry_files_enabled = False
+```
+После этого убедимся, что Ansible может управлять нашим хостом. Сделатþ ÿто
+можно с помощью команды:
+```
+ansible -i /home/ed/otus/10/staging/hosts all -m ping
+```
+!!!картинка!!!
