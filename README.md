@@ -252,6 +252,7 @@ ansible-playbook nginx.yml -t nginx-package
 (мой скрин не совсем корректный - первый vagrantfile поднялся сразу, второй нет, пришлось поправлять, но переделывать до идеального скрина - не хватает терпения)
 ![Image alt](https://github.com/Edo1993/otus_10/raw/master/111.png)
 проверяем, что работает
+
 http://192.168.11.150:8080/
 ![Image alt](https://github.com/Edo1993/otus_10/raw/master/112.png)
 http://192.168.11.151:8080/
