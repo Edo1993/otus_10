@@ -75,18 +75,54 @@ remote_user = vagrant
 host_key_checking = False
 retry_files_enabled = False
 ```
+# Ansible
+
 После этого убедимся, что Ansible может управлять нашим хостом. Сделать это
 можно с помощью команды:
 ```
-ansible -i /home/ed/otus/10/staging/hosts all -m ping
+ansible -i /home/ed/otus/10_otus/staging/hosts all -m ping
 ```
 ![Image alt](https://github.com/Edo1993/otus_10/raw/master/103.png)
 
 Теперь, когда убедились, что у нас все подготовлено - установлен Ansible, поднят хост для теста и Ansible имеет к нему доступ, мы можем конфигурировать наш хост. Для начала воспользуемся *Ad-Hoc командами* и выполним некоторые удаленные команды на нашем хосте:
 ```
-ansible -i /home/ed/otus/10/staging/hosts all -m command -a "uname -r"
+ansible -i /home/ed/otus/10_otus/staging/hosts all -m command -a "uname -r"
 ```
 ![Image alt](https://github.com/Edo1993/otus_10/raw/master/104.png)
 ```
-ansible nginx -m systemd -a name=firewalld
+ansible -i /home/ed/otus/10_otus/staging/hosts all -m systemd -a name=firewalld
 ```
+![Image alt](https://github.com/Edo1993/otus_10/raw/master/105.png)
+Вывод большой, нас интересует только строка
+```
+"status": {
+        ...
+        "ActiveState": "inactive", 
+        ...
+```
+Установим пакет epel-release на хосты
+```
+ansible -i /home/ed/otus/10/staging/hosts all -m yum -a "name=epel-release state=present" -b
+```
+![Image alt](https://github.com/Edo1993/otus_10/raw/master/106.png)
+
+Напишем простой Playbook, который будет устанавливать пакет epel-release. Создадим файл epel.yml со следующим содержимым
+```
+---
+- name: Install EPEL Repo
+  hosts: all
+  become: true
+  tasks:
+   - name: Install EPEL Repo package from standard repo
+     yum:
+      name: epel-release
+      state: present
+```
+Запустим Playbook:
+```
+ansible-playbook epel.yml
+```
+![Image alt](https://github.com/Edo1993/otus_10/raw/master/107.png)
+
+Затем выполним команду ```ansible -i /home/ed/otus/10/staging/hosts all -m yum -a "name=epel-release state=absent" -b```, ещё раз запустим Playbook, разница в выводе:
+![Image alt](https://github.com/Edo1993/otus_10/raw/master/108.png)
