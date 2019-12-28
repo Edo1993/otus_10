@@ -126,3 +126,75 @@ ansible-playbook epel.yml
 
 Затем выполним команду ```ansible -i /home/ed/otus/10/staging/hosts all -m yum -a "name=epel-release state=absent" -b```, ещё раз запустим Playbook, разница в выводе:
 ![Image alt](https://github.com/Edo1993/otus_10/raw/master/108.png)
+
+/во втором случае устанавливалось подольше?/
+
+# Homework
+
+За основу будущего playbook возьмем уже созданный нами файл epel.yml, переименовав его в nginx.yml. Добавим в него установку пакета NGINX. Измененный файл будет выглядеть так:
+```
+---
+- name: NGINX | Install and configure NGINX
+  hosts: all
+  become: true
+  
+  tasks:
+    - name: NGINX | Install EPEL Repo package from standart repo
+      yum:
+        name: epel-release
+        state: present
+      tags:
+        - epel-package
+        - packages
+
+    - name: NGINX | Install NGINX package from EPEL Repo
+      yum:
+        name: nginx
+        state: latest
+      tags:
+        - nginx-package
+        - packages
+```
+В файл добавили Tags. Теперь можно вывести в консоль список тегов и выполнить, например, только установку NGINX. В нашем случае так, например, можно осуществлять его обновление. Выведем в консоль все теги:
+```
+ansible-playbook nginx.yml --list-tags
+```
+![Image alt](https://github.com/Edo1993/otus_10/raw/master/109.png)
+Запустим толþко установку NGINX:
+```
+ansible-playbook nginx.yml -t nginx-package
+```
+![Image alt](https://github.com/Edo1993/otus_10/raw/master/110.png)
+Далее добавим шаблон для конфига NGINX и модуль, который будет копировать этот шаблон на хост, пропишем в Playbook необходимую нам переменную для того, чтобы NGINX слушал на порту 8080. На данном этапе Playbook будет выглядеть так:
+```
+---
+- name: NGINX | Install and configure NGINX
+  hosts: all
+  become: true
+  vars:
+    nginx_listen_port: 8080
+
+  tasks:
+    - name: NGINX | Install EPEL Repo package from standart repo
+      yum:
+        name: epel-release
+        state: present
+      tags:
+        - epel-package
+        - packages
+
+    - name: NGINX | Install NGINX package from EPEL Repo
+      yum:
+        name: nginx
+        state: latest
+      tags:
+        - nginx-package
+        - packages
+
+    - name: NGINX | Create NGINX config file from template
+      template:
+        src: templates/nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+      tags:
+        - nginx-configuration
+```
