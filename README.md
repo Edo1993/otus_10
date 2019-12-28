@@ -62,8 +62,11 @@ nginx2 ansible_host=127.0.0.1 ansible_port=2201 ansible_private_key_file=/home/e
 nginx ansible_host=127.0.0.1 ansible_port=2200 ansible_private_key_file=/home/ed/otus/10_otus/1/.vagrant/machines/nginx/virtualbox/private_key
 ```
 Отредактируем файл ```ansible.cfg```
+
 inventory - путь к моему hosts
+
 remote_user = vagrant - эту строку можно не указывать, но тогда в hosts для каждой vm должен быть указан ```ansible_user=vagrant```
+
 host_key_checking = False - отменить проверку пароля
 ```
 [defaults]
@@ -72,9 +75,15 @@ remote_user = vagrant
 host_key_checking = False
 retry_files_enabled = False
 ```
-После этого убедимся, что Ansible может управлять нашим хостом. Сделатþ ÿто
+После этого убедимся, что Ansible может управлять нашим хостом. Сделать это
 можно с помощью команды:
 ```
 ansible -i /home/ed/otus/10/staging/hosts all -m ping
 ```
-!!!картинка!!!
+![Image alt](https://github.com/Edo1993/otus_10/raw/master/103.png)
+
+Теперь, когда убедились, что у нас все подготовлено - установлен Ansible, поднят хост для теста и Ansible имеет к нему доступ, мы можем конфигурировать наш хост. Для начала воспользуемся *Ad-Hoc командами* и выполним некоторые удаленные команды на нашем хосте:
+```
+ansible -i /home/ed/otus/10/staging/hosts all -m command -a "uname -r"
+```
+![Image alt](https://github.com/Edo1993/otus_10/raw/master/104.png)
