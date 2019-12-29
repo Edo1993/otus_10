@@ -7,7 +7,17 @@
 - после установки nginx должен быть в режиме enabled в systemd
 - должен быть использован notify для старта nginx после установки
 - сайт должен слушать на нестандартном порту - 8080, для этого использовать переменные в Ansible
+
+клонировать [отсюда](https://github.com/Edo1993/otus_10/tree/master/1_part), выполнить
+```
+ansible-playbook nginx.yml
+```
+
 * Сделать все это с использованием Ansible роли
+клонировать [отсюда](https://github.com/Edo1993/otus_10/tree/master/2_part), выполнить
+```
+ansible-playbook nginx.yml
+```
 
 # Установка Ansible
 (сначала шпарим на ubuntu)
